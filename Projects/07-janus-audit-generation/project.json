@@ -1,0 +1,33 @@
+{
+  "project_id": "janus-audit-generation",
+  "status": "implemented_scaffold",
+  "result_status": "not_measured",
+  "model_stack": [
+    "deepseek-ai/Janus-Pro-7B frozen baseline",
+    "structured SFT experimental adapter",
+    "text-decision GRPO experimental adapter",
+    "versioned deterministic policy engine"
+  ],
+  "data_contract": "licensed media + sha256 + group_id + policy_version + structured audit target",
+  "training_boundary": {
+    "sft": "experimental; adapter training is not executed by this repository",
+    "grpo": "text JSON decisions and safe briefs only; no image-token RL",
+    "production_gate": "hard policy decisions cannot be overridden by model reward"
+  },
+  "evaluation": [
+    "audit_macro_f1",
+    "high_risk_recall",
+    "evidence_precision",
+    "json_valid_rate",
+    "selective_error_rate",
+    "generation_brief_pass_rate",
+    "cross_task_regression",
+    "policy_violation_rate"
+  ],
+  "acceptance_targets": {
+    "audit_macro_f1": {"operator": ">=", "value": 0.84, "status": "not_measured"},
+    "cross_task_regression": {"operator": "<=", "value": 0.03, "status": "not_measured"},
+    "policy_violation_rate": {"operator": "<=", "value": 0.01, "status": "not_measured"}
+  }
+}
+

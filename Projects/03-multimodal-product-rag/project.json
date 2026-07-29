@@ -1,0 +1,14 @@
+{
+  "project_id": "multimodal-product-rag",
+  "status": "scaffold",
+  "model_stack": ["Qwen3-VL-Embedding-2B", "Qwen3-VL-Reranker-2B", "Qwen3-VL-4B-Instruct", "FAISS", "GRPO"],
+  "data_contract": "product media, versioned metadata, chunks, permissions, and cited QA pairs",
+  "training": {"stage": "retrieval_then_sft_then_grpo", "hard_negative_mining": true},
+  "evaluation": ["recall_at_10", "ndcg_at_10", "grounded_answer_rate", "citation_precision", "p95_latency_ms"],
+  "acceptance_targets": {
+    "recall_at_10": {"operator": ">=", "value": 0.82},
+    "grounded_answer_rate": {"operator": ">=", "value": 0.78},
+    "citation_precision": {"operator": ">=", "value": 0.9}
+  }
+}
+

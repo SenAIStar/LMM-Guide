@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "janus-audit-generation"
+version = "0.1.0"
+description = "Auditable Janus content review and generation-assistance scaffold"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+ml = [
+  "torch>=2.1",
+  "transformers>=4.38",
+  "pillow>=10.0",
+  "numpy>=1.26",
+  "janus @ git+https://github.com/deepseek-ai/Janus.git",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

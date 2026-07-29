@@ -1,0 +1,47 @@
+{
+  "project_id": "low-cost-image-service",
+  "status": "scaffold",
+  "result_status": "not_measured",
+  "implementation_scope": "The control plane is covered by CPU-only tests and a deterministic fake backend. No GPU throughput, latency, memory, quality, or cost result is claimed.",
+  "model_stack": [
+    "Diffusers",
+    "SDXL",
+    "versioned LoRA adapters",
+    "deadline-aware micro-batching",
+    "content-addressed exact cache"
+  ],
+  "data_contract": "A validated generation request includes tenant, model and adapter revisions, artifact hashes, prompt inputs, seed, scheduler, shape, step count, policy version, idempotency key, and deadline.",
+  "training": {
+    "stage": "serving_only",
+    "weights_required": true,
+    "upstream_artifacts": "Use frozen, licensed artifacts from project 05 or another approved registry."
+  },
+  "evaluation": [
+    "accepted_images_per_gpu_hour",
+    "end_to_end_p50_p95_p99_ms",
+    "queue_wait_p95_ms",
+    "peak_vram_mb",
+    "oom_attempt_rate",
+    "exact_cache_hit_rate",
+    "quality_guard_pass_rate",
+    "gpu_cost_per_accepted_image"
+  ],
+  "acceptance_targets": {
+    "relative_accepted_throughput_vs_single_request_baseline": {
+      "operator": ">=",
+      "value": 1.6,
+      "status": "not_measured"
+    },
+    "oom_attempt_rate": {
+      "operator": "<=",
+      "value": 0.001,
+      "status": "not_measured"
+    },
+    "quality_guard_pass_rate": {
+      "operator": ">=",
+      "value": 0.95,
+      "status": "not_measured"
+    }
+  }
+}
+

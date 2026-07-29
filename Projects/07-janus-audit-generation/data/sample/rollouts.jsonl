@@ -1,0 +1,3 @@
+{"candidate":{"asset_id":"demo-ad-001","confidence":0.91,"decision":"pass","evidence":[],"generation_brief":{"human_review_required":false,"must_avoid":["受监管功效承诺","个人敏感信息"],"must_include":["合成示例标识"],"objective":"生成一张不包含人物或真实品牌的抽象配色海报"},"policy_version":"demo-policy-2026-07","rationale":"合成样例只包含色块。","review_required":false,"risk_labels":["none"]},"prompt_id":"demo-ad-001","sample_index":0}
+{"candidate":{"asset_id":"demo-ad-001","confidence":0.55,"decision":"abstain","evidence":[],"generation_brief":null,"policy_version":"demo-policy-2026-07","rationale":"无法判断。","review_required":true,"risk_labels":["none"]},"prompt_id":"demo-ad-001","sample_index":1}
+

@@ -1,0 +1,11 @@
+{
+  "model_id": "Qwen/Qwen3-VL-4B-Instruct",
+  "model_revision": "REQUIRED_COMMIT_SHA",
+  "policy_path": "configs/policy.v1.json",
+  "auto_action_threshold": 0.95,
+  "max_images": 8,
+  "max_output_tokens": 512,
+  "invalid_output_action": "manual_review",
+  "policy_conflict_action": "manual_review"
+}
+

@@ -1,0 +1,16 @@
+# Install only for the corresponding GPU experiments.
+transformers>=4.57
+accelerate>=1.10
+peft>=0.17
+datasets>=4.0
+torch>=2.6
+torchvision>=0.21
+vllm>=0.14
+faiss-cpu>=1.12
+diffusers>=0.35
+mavsdk>=3.10
+
+# Training frameworks are installed from their official repositories/environments.
+# LLaMA-Factory: https://github.com/hiyouga/LlamaFactory
+# VeRL: https://github.com/volcengine/verl
+

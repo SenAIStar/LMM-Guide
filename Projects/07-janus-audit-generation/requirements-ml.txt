@@ -1,0 +1,7 @@
+# Install only on a CUDA machine used for the Janus baseline.
+torch>=2.1
+transformers>=4.38
+pillow>=10.0
+numpy>=1.26
+git+https://github.com/deepseek-ai/Janus.git
+

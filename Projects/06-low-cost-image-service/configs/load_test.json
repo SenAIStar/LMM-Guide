@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "seed": 20260729,
+  "request_count": 120,
+  "arrival_rate_rps": 2.0,
+  "tenant_count": 4,
+  "request_mix": [
+    {"weight": 0.60, "width": 1024, "height": 1024, "steps": 30, "scheduler": "euler"},
+    {"weight": 0.25, "width": 768, "height": 1024, "steps": 30, "scheduler": "euler"},
+    {"weight": 0.15, "width": 1024, "height": 1024, "steps": 40, "scheduler": "dpmpp-2m"}
+  ],
+  "duplicate_ratio": 0.10,
+  "deadline_ms": 30000,
+  "fake_backend": {
+    "base_batch_ms": 1800,
+    "per_image_ms": 550,
+    "oom_over_batch_size": 3
+  },
+  "report_status": "simulated_not_gpu_measured"
+}
+

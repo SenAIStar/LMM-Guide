@@ -1,0 +1,10 @@
+torch>=2.1
+diffusers>=0.35
+transformers>=4.44
+accelerate>=1.0
+peft>=0.13
+datasets>=3.0
+safetensors>=0.4
+Pillow>=10.0
+opencv-python>=4.8
+tensorboard>=2.16

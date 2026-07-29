@@ -1,0 +1,11 @@
+{
+  "stage": "experimental",
+  "base_model": "deepseek-ai/Janus-Pro-7B",
+  "model_revision": "PIN_A_REVIEWED_HF_COMMIT",
+  "trainable_scope": "language-side adapter; verify module names against pinned revision",
+  "sequence_length": 4096,
+  "target_format": "strict AuditResult JSON",
+  "split_key": "group_id",
+  "required_fields": ["asset_id", "media_sha256", "license_id", "policy_version", "target"]
+}
+

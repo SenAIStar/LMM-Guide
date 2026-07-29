@@ -1,0 +1,31 @@
+{
+  "project_id": "controlnet-lora-generation",
+  "status": "scaffold",
+  "result_status": "not_measured",
+  "task": "authorized product marketing image generation with Canny structure control and brand-domain LoRA",
+  "model_stack": [
+    "stabilityai/stable-diffusion-xl-base-1.0",
+    "diffusers/controlnet-canny-sdxl-1.0",
+    "Diffusers",
+    "PEFT LoRA"
+  ],
+  "mainline": "pretrained_controlnet_plus_trained_lora",
+  "optional_path": "fine_tune_controlnet_only_after_domain_gate_failure",
+  "data_contract": "licensed target image, caption, control image, capture group, split and file hashes",
+  "evaluation": [
+    "edge_precision_recall_f1_with_tolerance",
+    "text_image_alignment",
+    "distribution_quality",
+    "brand_or_subject_similarity",
+    "human_blind_preference",
+    "latency_and_vram",
+    "safety_gate"
+  ],
+  "acceptance_targets": {
+    "edge_f1": {"operator": ">=", "value": 0.72},
+    "human_preference": {"operator": ">=", "value": 0.65},
+    "unsafe_pass_rate": {"operator": "<=", "value": 0.05}
+  },
+  "acceptance_target_status": "reference_gates_not_measured",
+  "result_policy": "Replace reference gates with measured values only after saving sample predictions, run records and reviewer protocol."
+}

@@ -1,0 +1,14 @@
+{
+  "fixed": {
+    "prompt_set": "eval/prompts.v1.jsonl",
+    "seeds": [11, 29, 47, 71],
+    "num_inference_steps": 30,
+    "resolution": [1024, 1024]
+  },
+  "variants": [
+    {"name": "base", "use_controlnet": false, "use_lora": false},
+    {"name": "control_only", "use_controlnet": true, "use_lora": false, "control_scales": [0.5, 0.8, 1.0]},
+    {"name": "lora_only", "use_controlnet": false, "use_lora": true, "lora_scales": [0.5, 0.7, 0.9]},
+    {"name": "joint", "use_controlnet": true, "use_lora": true, "control_scales": [0.5, 0.8, 1.0], "lora_scales": [0.5, 0.7, 0.9]}
+  ]
+}

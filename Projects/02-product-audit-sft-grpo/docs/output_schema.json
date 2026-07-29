@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audit-output.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "decision", "risk_codes", "evidence", "policy_refs", "explanation"],
+  "properties": {
+    "schema_version": {"const": "audit-output.v1"},
+    "decision": {"enum": ["pass", "reject", "review"]},
+    "risk_codes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["risk_code", "media_index", "support", "bbox", "policy_rule_id"],
+        "properties": {
+          "risk_code": {"type": "string"},
+          "media_index": {"type": "integer", "minimum": 0},
+          "support": {"enum": ["image_level", "region"]},
+          "bbox": {
+            "oneOf": [
+              {"type": "null"},
+              {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}, {"type": "number"}, {"type": "number"}], "items": false}
+            ]
+          },
+          "policy_rule_id": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "policy_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "explanation": {"type": "string", "maxLength": 300}
+  }
+}
+

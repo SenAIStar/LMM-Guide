@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "config_revision": "service-dev-v1",
+  "result_status": "not_measured",
+  "model": {
+    "model_id": "stabilityai/stable-diffusion-xl-base-1.0",
+    "model_revision": "PIN_A_COMMIT_SHA_BEFORE_GPU_RUN",
+    "dtype": "float16",
+    "device": "cuda",
+    "compile_unet": false,
+    "compile_mode": "reduce-overhead",
+    "lora_mode": "dynamic",
+    "vae_slicing": true,
+    "vae_tiling": false,
+    "model_cpu_offload": false
+  },
+  "admission": {
+    "allowed_models": ["stabilityai/stable-diffusion-xl-base-1.0"],
+    "max_width": 1536,
+    "max_height": 1536,
+    "max_pixels": 1572864,
+    "max_steps": 50,
+    "max_adapters": 2,
+    "max_queue_depth": 256,
+    "gpu_budget_mb": 24576,
+    "model_resident_mb": 12800,
+    "activation_mb_per_megapixel": 1450,
+    "adapter_mb_each": 300,
+    "headroom_mb": 2048
+  },
+  "batching": {
+    "max_batch_size": 4,
+    "preferred_batch_size": 4,
+    "max_delay_ms": 40,
+    "max_batch_work_units": 160,
+    "oom_split_retries": 2
+  },
+  "cache": {
+    "enabled": true,
+    "root": "artifacts/cache",
+    "tenant_isolated": true,
+    "cache_only_guard_accepted_outputs": true
+  },
+  "pricing": {
+    "gpu_hour_price": null,
+    "currency": "CNY",
+    "note": "Fill with the effective billed GPU-hour price before a measured cost report."
+  }
+}
+

@@ -1,0 +1,8 @@
+{
+  "base_model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "controlnet_model": "diffusers/controlnet-canny-sdxl-1.0",
+  "prompt": "authorized product photo",
+  "negative_prompt": "watermark",
+  "controlnet_conditioning_scale": 0.8,
+  "lora_scale": 3.0
+}

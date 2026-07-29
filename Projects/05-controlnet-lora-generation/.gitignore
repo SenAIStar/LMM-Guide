@@ -1,0 +1,7 @@
+artifacts/
+data/lora_imagefolder/
+data/hf_dataset/
+outputs/
+__pycache__/
+*.pyc
+.venv/

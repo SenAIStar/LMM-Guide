@@ -1,0 +1,12 @@
+{
+  "qwen_model_id": "Qwen/Qwen3-VL-4B-Instruct",
+  "qwen_model_revision": "REPLACE_WITH_REVIEWED_MODEL_COMMIT",
+  "llamafactory_commit": "REPLACE_WITH_REVIEWED_LLAMFACTORY_COMMIT",
+  "transformers": ">=4.57.0",
+  "qwen_vl_utils": "0.0.14",
+  "vllm": ">=0.11.0",
+  "dataset_snapshot": "REPLACE_WITH_DATASET_SNAPSHOT_ID",
+  "dataset_license_sha256": "REPLACE_WITH_LICENSE_FILE_SHA256",
+  "split_salt": "vlm-product-v1",
+  "result_status": "not_measured"
+}

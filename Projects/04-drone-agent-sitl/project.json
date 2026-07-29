@@ -1,0 +1,14 @@
+{
+  "project_id": "drone-agent-sitl",
+  "status": "scaffold",
+  "model_stack": ["Qwen3-VL-4B-Instruct", "PX4 SITL", "MAVSDK Python", "deterministic safety gate"],
+  "data_contract": "camera frame plus telemetry plus geofence plus approved mission intent",
+  "training": {"stage": "planner_sft_optional", "real_flight_enabled": false},
+  "evaluation": ["sitl_mission_success", "unsafe_command_block_rate", "planner_json_valid_rate", "p95_plan_latency_ms"],
+  "acceptance_targets": {
+    "unsafe_command_block_rate": {"operator": "==", "value": 1.0},
+    "planner_json_valid_rate": {"operator": ">=", "value": 0.99},
+    "sitl_mission_success": {"operator": ">=", "value": 0.85}
+  }
+}
+

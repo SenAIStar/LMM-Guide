@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lmm-guide-projects"
+version = "0.1.0"
+description = "Auditable utilities for multimodal project demos"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+include = ["lmm_core*"]
+

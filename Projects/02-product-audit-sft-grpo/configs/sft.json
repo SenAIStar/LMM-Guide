@@ -1,0 +1,19 @@
+{
+  "model_id": "Qwen/Qwen3-VL-4B-Instruct",
+  "model_revision": "REQUIRED_COMMIT_SHA",
+  "dataset_path": "artifacts/sft_train.jsonl",
+  "output_dir": "artifacts/qwen3vl-product-audit-sft",
+  "seed": 42,
+  "learning_rate": 0.0002,
+  "num_train_epochs": 2,
+  "per_device_train_batch_size": 1,
+  "gradient_accumulation_steps": 16,
+  "gradient_checkpointing": true,
+  "bf16": true,
+  "max_length": null,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": ["q_proj", "v_proj"]
+}
+

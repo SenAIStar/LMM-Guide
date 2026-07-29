@@ -1,0 +1,14 @@
+{
+  "stage": "experimental",
+  "scope": "text_decision_only",
+  "adv_estimator": "grpo",
+  "rollout_n": 8,
+  "clip_ratio": 0.2,
+  "use_kl_loss": true,
+  "kl_loss_coef": 0.001,
+  "loss_agg_mode": "token-mean",
+  "zero_variance_epsilon": 1e-6,
+  "hard_policy_violation_reward": -1.0,
+  "note": "Values are reproducible starting points, not measured optima. Ablate sample-level versus token-level aggregation."
+}
+

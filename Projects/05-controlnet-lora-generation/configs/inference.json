@@ -1,0 +1,19 @@
+{
+  "base_model": "stabilityai/stable-diffusion-xl-base-1.0",
+  "base_revision": "PIN_MODEL_REVISION",
+  "controlnet_model": "diffusers/controlnet-canny-sdxl-1.0",
+  "controlnet_revision": "PIN_MODEL_REVISION",
+  "lora_revision": "PIN_LOCAL_CHECKPOINT_HASH",
+  "lora_weight_name": "pytorch_lora_weights.safetensors",
+  "prompt": "studio product photo, authorized brand style, clean background, commercial lighting",
+  "negative_prompt": "distorted silhouette, duplicate object, unreadable text, watermark, low quality",
+  "controlnet_conditioning_scale": 0.8,
+  "lora_scale": 0.7,
+  "guidance_scale": 6.5,
+  "num_inference_steps": 30,
+  "width": 1024,
+  "height": 1024,
+  "seed": 20260729,
+  "dtype": "float16",
+  "device": "cuda"
+}

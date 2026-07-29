@@ -1,0 +1,14 @@
+{
+  "schema_version": "audit-eval.v1",
+  "high_risk_codes": ["BANNED_CATEGORY", "CONTACT_DIVERSION"],
+  "confidence_bins": 10,
+  "slices": ["category", "risk_code", "image_count_bucket", "ocr_density_bucket", "policy_version"],
+  "required_ablations": ["rules_only", "sft_only", "sft_grpo", "without_evidence_reward"],
+  "acceptance_targets": {
+    "schema_valid_rate": "not_measured",
+    "macro_f1": "not_measured",
+    "high_risk_false_negative_rate": "not_measured",
+    "auto_reject_false_positive_rate": "not_measured"
+  }
+}
+

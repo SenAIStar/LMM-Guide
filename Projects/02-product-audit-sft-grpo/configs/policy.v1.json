@@ -1,0 +1,35 @@
+{
+  "schema_version": "audit-policy.v1",
+  "policy_version": "cn-commerce-demo.2026-07-30",
+  "effective_at": "2026-07-30T00:00:00+08:00",
+  "rules": [
+    {
+      "id": "R-BANNED-001",
+      "risk_code": "BANNED_CATEGORY",
+      "severity": "critical",
+      "decision": "reject",
+      "field": "category",
+      "operator": "in",
+      "value": ["demo_banned_item"]
+    },
+    {
+      "id": "R-CONTACT-001",
+      "risk_code": "CONTACT_DIVERSION",
+      "severity": "high",
+      "decision": "reject",
+      "field": "ocr_tokens",
+      "operator": "contains_any",
+      "value": ["微信", "vx", "加v", "手机号"]
+    },
+    {
+      "id": "R-MISSING-001",
+      "risk_code": "MISSING_REQUIRED_ATTRIBUTE",
+      "severity": "medium",
+      "decision": "review",
+      "field": "attributes.brand",
+      "operator": "equals",
+      "value": ""
+    }
+  ]
+}
+

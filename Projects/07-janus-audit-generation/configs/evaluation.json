@@ -1,0 +1,15 @@
+{
+  "result_status": "not_measured",
+  "threshold_selection_split": "validation",
+  "report_slices": [
+    "ocr_heavy",
+    "small_text",
+    "multi_image",
+    "ambiguous_policy",
+    "prompt_injection",
+    "out_of_domain"
+  ],
+  "baselines": ["janus_zero_shot", "structured_sft", "structured_sft_plus_text_grpo"],
+  "cross_task_metrics": ["understanding_holdout_score", "generation_prompt_adherence", "generation_policy_pass_rate"]
+}
+

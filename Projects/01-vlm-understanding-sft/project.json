@@ -1,0 +1,49 @@
+{
+  "project_id": "vlm-understanding-sft",
+  "status": "validated_scaffold",
+  "result_status": "not_measured",
+  "scope": "static product catalog images to auditable JSON",
+  "model_stack": [
+    "Qwen/Qwen3-VL-4B-Instruct",
+    "LLaMA-Factory LoRA SFT",
+    "Transformers zero-shot baseline",
+    "vLLM serving"
+  ],
+  "data_contract": {
+    "format": "LLaMA-Factory multimodal ShareGPT",
+    "message_fields": ["role", "content"],
+    "image_placeholder": "<image>",
+    "split_unit": "group_id",
+    "media_integrity": "sha256",
+    "target_schema": "vlm_product.schema.v1"
+  },
+  "data_sources": {
+    "prototype": "Amazon Berkeley Objects; verify the downloaded archive license before use",
+    "external_diagnostics": ["COCO Captions", "TextVQA", "A-OKVQA", "POPE"]
+  },
+  "implemented": [
+    "current messages/role/content dataset mapping",
+    "training-record and structured-output validation",
+    "media SHA-256 provenance checks",
+    "group-stable split and leakage checks",
+    "field exact match and unsupported-attribute evaluation",
+    "manual-review routing",
+    "lazy Qwen3-VL Transformers adapter"
+  ],
+  "not_executed": [
+    "ABO dataset download and visual label review",
+    "GPU zero-shot baseline",
+    "LoRA training",
+    "official external benchmark evaluation",
+    "latency and peak-VRAM benchmark"
+  ],
+  "acceptance_targets": {
+    "schema_valid_rate": "not_measured",
+    "field_exact_match": "not_measured",
+    "unsupported_attribute_rate": "not_measured",
+    "evidence_coverage": "not_measured",
+    "manual_review_rate": "not_measured",
+    "p95_latency_ms": "not_measured",
+    "peak_vram_gb": "not_measured"
+  }
+}

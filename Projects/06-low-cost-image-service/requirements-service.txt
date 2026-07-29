@@ -1,0 +1,11 @@
+# The core scheduler, cache, metrics, simulator, and tests use only the Python standard library.
+# Install these packages only when running the HTTP or real GPU backend.
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+torch>=2.3
+diffusers>=0.35
+transformers>=4.44
+accelerate>=0.34
+safetensors>=0.4
+Pillow>=10
+

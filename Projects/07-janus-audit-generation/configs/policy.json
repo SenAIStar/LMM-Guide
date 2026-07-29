@@ -1,0 +1,14 @@
+{
+  "policy_version": "demo-policy-2026-07",
+  "risk_labels": {
+    "none": {"severity": 0, "allowed_decisions": ["pass"]},
+    "copyright_logo": {"severity": 1, "allowed_decisions": ["revise", "abstain"]},
+    "regulated_claim": {"severity": 2, "allowed_decisions": ["revise", "reject", "abstain"]},
+    "personal_data": {"severity": 2, "allowed_decisions": ["revise", "reject", "abstain"]},
+    "minor_safety": {"severity": 3, "allowed_decisions": ["reject", "abstain"]}
+  },
+  "manual_review_min_severity": 2,
+  "generation_block_min_severity": 3,
+  "brief_block_terms": ["真实身份证号", "保证治愈", "未成年人危险挑战"]
+}
+

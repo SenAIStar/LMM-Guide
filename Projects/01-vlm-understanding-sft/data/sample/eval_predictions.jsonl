@@ -1,0 +1,1 @@
+{"sample_id":"demo_eval_001","prediction":{"schema_version":"1.0","product_type":"chair","attributes":{"color":["black"],"material":[]},"visible_text":[],"evidence":[{"field":"product_type","media_index":0,"support":"image_level"},{"field":"attributes.color","media_index":0,"support":"image_level"}],"decision":"review"}}
