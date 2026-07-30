@@ -1,28 +1,20 @@
-# 多模态无人机 Agent（PX4 SITL）
+# 多模态无人机 Agent
 
-## 范围
+这部分代码对应无人机巡检 Agent，核心是让多模态模型负责生成任务计划，由确定性规则决定动作能否执行。
 
-当前项目只面向 PX4 SITL 仿真：Qwen3-VL 根据图像、遥测和任务意图生成结构化计划；确定性安全门禁检查动作、限高、电量、GPS 和人工批准；通过后才由 MAVSDK 执行。默认禁止连接真实飞行器。
+## 核心链路
 
-## 控制链路
+`图像/任务/遥测 -> 计划 JSON -> Schema -> Safety Gate -> 状态机 -> MAVSDK -> 遥测回读`
 
-`感知输入 -> 模型计划 JSON -> Schema 校验 -> Safety Gate -> MAVSDK -> 遥测回读 -> 状态机`
+## 代码目录
 
-模型不是飞控，不直接输出 PWM，也不能绕过返航、地理围栏或人工急停。MAVSDK 调用必须捕获异常；断链、低电量、无 GPS 和超时统一进入 Hold/RTL/人工接管状态。
+- `src/drone_agent/contracts.py`：任务计划、动作白名单和遥测协议。
+- `src/drone_agent/planner.py`：多模态 Planner 提示词与 JSON 解析。
+- `src/drone_agent/safety.py`：遥测新鲜度、电量、定位、限高、地理围栏和人工批准。
+- `src/drone_agent/state_machine.py`：任务状态转换与飞行状态恢复。
+- `src/drone_agent/executor.py`：动作派发、超时处理、幂等和 Hold 恢复。
+- `src/drone_agent/mavsdk_adapter.py`：MAVSDK Action API 适配。
 
-共享代码 `FlightSafetyGate` 可本地测试。正式仿真先启动 PX4 SITL，再单独连接 MAVSDK；真实飞行需要额外法规、硬件冗余和现场风险评审，不在本项目交付范围。
+## 关键设计
 
-## 评测与消融
-
-构造正常、低电、GPS 丢失、越界、错误目标和链路中断场景，报告任务成功率、危险命令拦截率、Schema 有效率和 P95 规划延迟。消融视觉输入、遥测输入、安全门禁和失败恢复策略。目标见 `project.json`。
-
-## 简历写法
-
-> 参考验收口径：在 PX4 SITL 中实现 Qwen3-VL 任务规划与 MAVSDK 状态机，增加独立 Safety Gate 和人工批准机制，以危险命令 100% 拦截、计划 JSON 有效率≥99%、仿真任务成功率≥85% 为进入硬件在环前的门槛。
-
-## 面试追问
-
-**为什么模型不能直接调 MAVSDK？** 概率模型会生成越权或过期动作，必须由确定性状态机和实时遥测重新判定。
-
-**仿真通过能否直接实飞？** 不能。还需要硬件在环、传感器故障注入、地理围栏、法规审批、冗余链路和现场操作手册。
-
+Planner 只输出 `takeoff/goto/inspect/hold/rtl/land` 六类高层动作。每一步执行前重新读取遥测并经过 Safety Gate；计划时间戳、遥测快照或状态机不一致时直接阻断。执行器记录 `step_id` 防止重复派发，适配器异常或超时后切换到失败状态并请求 Hold。

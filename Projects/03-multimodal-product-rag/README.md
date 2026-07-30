@@ -1,30 +1,24 @@
 # 商品理解与问答（RAG + SFT + GRPO）
 
-## 业务目标
+这部分代码对应商品理解与问答项目，保留检索、引用约束、训练数据和奖励计算几条主链路。
 
-用户可以用文字、图片或混合查询查商品，并得到带来源的属性、兼容性和使用建议。系统必须区分“检索不到”和“模型不知道”，不得用参数记忆补写库存、价格或规格。
+## 核心链路
 
-## 系统与训练
+`商品文本/图片 -> 权限与版本过滤 -> 稀疏/稠密召回 -> RRF 融合 -> 多模态精排 -> 引用约束生成 -> SFT -> GRPO`
 
-- 召回：Qwen3-VL-Embedding-2B 编码文本、商品图和混合输入；FAISS 建版本化索引。
-- 精排：Qwen3-VL-Reranker-2B 对候选商品与问题做相关性排序。
-- 生成：Qwen3-VL-4B 根据 Top-K 证据回答并返回商品 ID/片段 ID。
-- 优化：用点击/人工标注挖硬负样本；SFT 学习引用格式；GRPO 奖励引用正确、拒答合理和关键字段一致。
-- 数据：可从 Amazon Berkeley Objects 的商品图与元数据开始做公开原型，生产数据需遵守授权和权限过滤。
+## 代码目录
 
-`recall_at_k` 和 `grounded_rate` 已在共享代码中实现，确保检索和生成分开验收。
+- `src/product_rag/catalog.py`：商品证据块、版本、时效和 ACL 过滤。
+- `src/product_rag/retrieval.py`：稀疏与稠密召回、RRF 融合和精排接口。
+- `src/product_rag/qwen_retrieval.py`：Qwen3-VL Embedding/Reranker 适配。
+- `src/product_rag/qdrant_store.py`：向量检索与权限过滤条件。
+- `src/product_rag/contracts.py`：回答 JSON、Claim 和 Citation 协议。
+- `src/product_rag/service.py`：检索、生成、校验和转人工流程。
+- `src/product_rag/training_data.py`：SFT 与 GRPO 样本组织。
+- `src/product_rag/rewards.py`：格式、引用、字段一致性和拒答奖励。
+- `src/product_rag/evaluation.py`：Recall、MRR、nDCG、引用和拒答指标。
+- `scripts/train_sft.py`、`scripts/train_grpo.py`：LoRA SFT 与 GRPO 核心训练配置。
 
-## 评测与消融
+## 关键设计
 
-检索报告 Recall@10、nDCG@10；生成报告 Grounded Answer Rate、Citation Precision、字段 EM；系统报告 P50/P95 延迟。消融文本/图像/混合召回、是否精排、Top-K、是否 SFT/GRPO。目标见 `project.json`。
-
-## 简历写法
-
-> 参考验收口径：搭建 Qwen3-VL-Embedding/Reranker 多模态 RAG，使用硬负样本、引用约束 SFT 与 GRPO 优化回答，在权限过滤后的独立查询集上以 Recall@10≥82%、有据回答率≥78%、引用精度≥90% 为验收线。
-
-## 面试追问
-
-**召回差和生成差怎么拆？** 用 Oracle Context 测生成上限，再用固定生成器比较检索器；如果 Oracle 高而端到端低，优先修召回/精排。
-
-**多模态索引如何更新？** 商品版本写入独立文档 ID，先构建新索引并做影子评测，再原子切换别名；删除请求同步清理向量和缓存。
-
+检索前先做租户、ACL、商品范围和版本时效过滤。生成结果只接受单个 JSON 对象，每条 Claim 必须引用本次检索上下文中的证据块。GRPO 奖励沿用同一套协议校验，避免训练和线上验收各写一套口径。
